@@ -8,13 +8,13 @@ sysrc -f /etc/rc.conf mysql_enable="YES"
 sysrc -f /etc/rc.conf redmine_enable="YES"
 sysrc -f /etc/rc.conf nginx_enable="YES"
 
-PATH="/usr/local/www/redmine-4.1"
+INSTALLINSTALLPATH="/usr/local/www/redmine-4.1"
 
-if [ ! -d "$PATH" ] ; then
-  mkdir -p ${PATH}
+if [ ! -d "$INSTALLPATH" ] ; then
+  mkdir -p ${INSTALLPATH}
 fi
 
-chown -R www:www ${PATH}
+chown -R www:www ${INSTALLPATH}
 
 # Start the service
 service mysql-server start 2>/dev/null
@@ -47,19 +47,19 @@ GRANT ALL PRIVILEGES ON ${DB}.* TO '${USER}'@'localhost';
 FLUSH PRIVILEGES;
 EOF
 
-sed -e 's|["'\'']||g' ${PATH}/config/database.yml.sample > ${PATH}/config/database.yml
+sed -e 's|["'\'']||g' ${INSTALLPATH}/config/database.yml.sample > ${INSTALLPATH}/config/database.yml
 
 # Set db password for redmine
-sed -i '' "s|root|${USER}|g" ${PATH}/config/database.yml
-sed -i '' "s|password: |password: ${PASS}|g" ${PATH}/config/database.yml
+sed -i '' "s|root|${USER}|g" ${INSTALLPATH}/config/database.yml
+sed -i '' "s|password: |password: ${PASS}|g" ${INSTALLPATH}/config/database.yml
 
 # Precompile the assets
-cd ${PATH}
+cd ${INSTALLPATH}
 bundle install --without development test
 bundle exec rake generate_secret_token
 bundle exec rake db:migrate RAILS_ENV=production
 
-chmod o-rwx ${PATH}
+chmod o-rwx ${INSTALLPATH}
 
 service redmine41 restart 2>/dev/null
 service nginx restart 2>/dev/null
