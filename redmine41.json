@@ -3,16 +3,8 @@
   "release": "11.2-RELEASE",
   "artifact": "https://github.com/djykstra/iocage-plugin-redmine41.git",
   "pkgs": [
-    "editors/nano",
-    "textproc/libxml2",
-    "textproc/libxslt",
-    "devel/rubygem-pkg-config",
-    "sysutils/rubygem-bundler",
-    "www/rubygem-thin",
-    "www/rubygem-puma",
-    "devel/subversion",
+    "databases/mysql56-server",
     "www/nginx",
-    "databases/mysql56-server"
   ],
   "packagesite": "http://pkg.freebsd.org/FreeBSD:11:amd64/latest",
   "fingerprints": {
