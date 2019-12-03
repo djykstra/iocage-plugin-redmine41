@@ -54,8 +54,13 @@ EOF
 sed -e 's|["'\'']||g' ${INSTALLPATH}/config/database.yml.example > ${INSTALLPATH}/config/database.yml
 
 # Set db password for redmine
+sed -i '' "s|database: redmine|database: ${DB}|g" ${INSTALLPATH}/config/database.yml
 sed -i '' "s|root|${USER}|g" ${INSTALLPATH}/config/database.yml
 sed -i '' "s|password: |password: ${PASS}|g" ${INSTALLPATH}/config/database.yml
+
+#adding gem
+echo "gem 'thin'" >> ${INSTALLPATH}/Gemfile.local
+echo "gem 'puma'" >> ${INSTALLPATH}/Gemfile.local
 
 # Precompile the assets
 cd ${INSTALLPATH}

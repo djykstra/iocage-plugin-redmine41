@@ -23,8 +23,6 @@ command=ruby25
 
 pidfile="/usr/local/www/redmine-4.1/tmp/pids/thin.pid"
 
-load_rc_config $name
-
 # add /usr/local/bin to path
 export PATH=$PATH:/usr/local/bin
 
@@ -34,7 +32,19 @@ export PATH=$PATH:/usr/local/bin
 : ${redmine_user="www"}
 : ${redmine_group="www"}
 
-command_args="-d -D -c /usr/local/www/redmine -u ${redmine_user} -g ${redmine_group}"
+stop_cmd="app_stop"
+command_args="-d -D -c /usr/local/www/redmine-4.1 -u ${redmine_user} -g ${redmine_group}"
 start_cmd="/usr/local/bin/thin ${command_args} ${redmine_flags} start"
+#thin -a 0.0.0.0 -p 3000 -D -c /usr/local/www/redmine-4.1 -u www -g www -e production start
 
+app_stop() {
+        if [ -e ${pidfile} ]; then
+                kill `cat ${pidfile}`;
+        else
+                echo ${name} is not running?
+        fi
+}
+
+
+load_rc_config $name
 run_rc_command "$1"
