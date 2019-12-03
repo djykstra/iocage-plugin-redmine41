@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #pkg install
-pkg install subversion libxml2 libxslt rubygem-thin rubygem-puma rubygem-pkg-config rubygem-bundler nano
+env ASSUME_ALWAYS_YES=YES pkg install subversion libxml2 libxslt rubygem-thin rubygem-puma rubygem-pkg-config rubygem-bundler nano
 
 #svn co redmine41
 cd /usr/local/www && svn co -q --trust-server-cert --non-interactive https://svn.redmine.org/redmine/branches/4.1-stable redmine-4.1
