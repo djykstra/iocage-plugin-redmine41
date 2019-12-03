@@ -1,9 +1,7 @@
 #!/bin/sh
 
 #svn co redmine41
-cd /usr/local/www && svn co https://svn.redmine.org/redmine/branches/4.1-stable redmine-4.1 << EOF
-p
-EOF
+cd /usr/local/www && svn co -q --trust-server-cert --non-interactive https://svn.redmine.org/redmine/branches/4.1-stable redmine-4.1
 
 # Enable the service
 chmod +x /usr/local/etc/rc.d/redmine41
@@ -11,7 +9,7 @@ sysrc -f /etc/rc.conf mysql_enable="YES"
 sysrc -f /etc/rc.conf redmine_enable="YES"
 sysrc -f /etc/rc.conf nginx_enable="YES"
 
-INSTALLINSTALLPATH="/usr/local/www/redmine-4.1"
+INSTALLPATH="/usr/local/www/redmine-4.1"
 
 if [ ! -d "$INSTALLPATH" ] ; then
   mkdir -p ${INSTALLPATH}
@@ -50,7 +48,7 @@ GRANT ALL PRIVILEGES ON ${DB}.* TO '${USER}'@'localhost';
 FLUSH PRIVILEGES;
 EOF
 
-sed -e 's|["'\'']||g' ${INSTALLPATH}/config/database.yml.sample > ${INSTALLPATH}/config/database.yml
+sed -e 's|["'\'']||g' ${INSTALLPATH}/config/database.yml.example > ${INSTALLPATH}/config/database.yml
 
 # Set db password for redmine
 sed -i '' "s|root|${USER}|g" ${INSTALLPATH}/config/database.yml
@@ -58,6 +56,7 @@ sed -i '' "s|password: |password: ${PASS}|g" ${INSTALLPATH}/config/database.yml
 
 # Precompile the assets
 cd ${INSTALLPATH}
+bundle config build.nokogiri --use-system-libraries
 bundle install --without development test
 bundle exec rake generate_secret_token
 bundle exec rake db:migrate RAILS_ENV=production

@@ -4,7 +4,12 @@
   "artifact": "https://github.com/djykstra/iocage-plugin-redmine41.git",
   "pkgs": [
     "editors/nano",
-    "lang/ruby25",
+    "textproc/libxml2",
+    "textproc/libxslt",
+    "devel/rubygem-pkg-config",
+    "sysutils/rubygem-bundler",
+    "www/rubygem-thin",
+    "www/rubygem-puma",
     "devel/subversion",
     "www/nginx",
     "databases/mysql56-server"
