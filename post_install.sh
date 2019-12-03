@@ -1,7 +1,9 @@
 #!/bin/sh
 
 #svn co redmine41
-cd /usr/local/www && svn co https://svn.redmine.org/redmine/branches/4.1-stable redmine-4.1
+cd /usr/local/www && svn co https://svn.redmine.org/redmine/branches/4.1-stable redmine-4.1 << EOF
+p
+EOF
 
 # Enable the service
 sysrc -f /etc/rc.conf mysql_enable="YES"

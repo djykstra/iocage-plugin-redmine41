@@ -3,6 +3,7 @@
   "release": "11.2-RELEASE",
   "artifact": "https://github.com/djykstra/iocage-plugin-redmine41.git",
   "pkgs": [
+    "editors/nano",
     "devel/subversion",
     "www/nginx",
     "databases/mysql56-server"
