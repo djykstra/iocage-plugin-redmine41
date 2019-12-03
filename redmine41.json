@@ -4,6 +4,7 @@
   "artifact": "https://github.com/djykstra/iocage-plugin-redmine41.git",
   "pkgs": [
     "editors/nano",
+    "lang/ruby25",
     "devel/subversion",
     "www/nginx",
     "databases/mysql56-server"

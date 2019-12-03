@@ -6,6 +6,7 @@ p
 EOF
 
 # Enable the service
+chmod +x /usr/local/etc/rc.d/redmine41
 sysrc -f /etc/rc.conf mysql_enable="YES"
 sysrc -f /etc/rc.conf redmine_enable="YES"
 sysrc -f /etc/rc.conf nginx_enable="YES"
