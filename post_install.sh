@@ -59,6 +59,9 @@ sed -i '' "s|database: redmine|database: ${DB}|g" ${INSTALLPATH}/config/database
 sed -i '' "s|root|${USER}|g" ${INSTALLPATH}/config/database.yml
 sed -i '' "s|password: |password: ${PASS}|g" ${INSTALLPATH}/config/database.yml
 
+#disable gem
+sed -i '' "s|gem 'puma'|#gem 'puma'|g" ${INSTALLPATH}/Gemfile
+
 #adding gem
 echo "gem 'thin'" >> ${INSTALLPATH}/Gemfile.local
 echo "gem 'puma'" >> ${INSTALLPATH}/Gemfile.local
