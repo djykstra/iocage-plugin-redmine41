@@ -1,11 +1,14 @@
 #!/bin/sh
 
+#svn co redmine41
+cd /usr/local/www && svn co https://svn.redmine.org/redmine/branches/4.1-stable redmine-4.1
+
 # Enable the service
 sysrc -f /etc/rc.conf mysql_enable="YES"
 sysrc -f /etc/rc.conf redmine_enable="YES"
 sysrc -f /etc/rc.conf nginx_enable="YES"
 
-PATH="/usr/local/www/redmine41"
+PATH="/usr/local/www/redmine-4.1"
 
 if [ ! -d "$PATH" ] ; then
   mkdir -p ${PATH}
