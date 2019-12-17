@@ -7,7 +7,7 @@ put to iocage/.plugin_index/
 
 run as root
 
-iocage fetch -P -n redmine41 -dhcp=on vnet=on bpf=yes
+iocage fetch -P -n redmine41 dhcp=on vnet=on bpf=yes
 
 or
 
@@ -24,7 +24,7 @@ put to /tmp/
 
 run as root
 
-iocage fetch -P -dhcp=on vnet=on bpf=yes -n /tmp/redmine41.json
+iocage fetch -P dhcp=on vnet=on bpf=yes -n /tmp/redmine41.json
 
 or
 
